@@ -1,38 +1,191 @@
+/* Video background styles */
+.background-video {
+  position: fixed; /* Fixed to cover the entire viewport */
+  top: 0; 
+  left: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  object-fit: cover; /* Ensure the video covers the area */
+  z-index: -1; /* Place it behind the content */
+  pointer-events: none; /* Prevent video from intercepting clicks */
+}
+
+/* App container styles */
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center; 
   align-items: center;
+  min-height: 100vh; /* Ensure it covers the entire viewport height */
+  position: relative; /* Position to allow overlay */
+  z-index: 0; /* Ensure it's above the background video */
+}
+
+/* Remove or adjust the dimming overlay over the background video */
+.App::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the last value (0.5) for dimming */
+  z-index: 0; 
+}
+
+/* Header styles */
+.App-header {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  flex-direction: column;
+  z-index: 1; /* Ensures the header content is above the overlay */
+}
+
+/* Typewriter effect styles */
+.typewriter {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 28px;
+  font-weight: 900;
+  font-style: italic;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7d794);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0.15em solid orange;
+  animation: typing 3s steps(40, end);
+}
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Button group styles */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  z-index: 2; /* Ensure buttons are above the overlay */
+}
+
+/* Unified Button Styling */
+button,
+.btn { /* Common styles for buttons */
+  margin: 10px; /* Keep existing margin */
+  padding: 10px 20px; /* Keep existing padding */
+  background-color: #080808; /* Default button color */
+  color: #ffffff; /* Text color */
+  border: 1px solid #63c3ca; /* Border color */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 14px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-sizing: border-box; /* Include padding and border in width and height */
+  transition: transform 0.2s, background-color 0.3s, text-shadow 0.2s, font-weight 0.2s; /* Smooth hover effects */
+  display: flex; /* Flexbox for centering content */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+}
+
+/* Button Hover Effect */
+button:hover,
+.btn:hover {
+  transform: scale(1.1); /* Slightly enlarge button on hover */
+  background-color: #69bbc3; /* Change background color on hover */
+  color: #010101; /* Ensure text color stays readable */
+  box-shadow: 0 0 25px rgba(37, 58, 58, 0.9), 0 0 30px rgba(0, 255, 255, 0.9), 0 0 35px rgba(0, 255, 255, 0.9); /* Glowing effect */
+  font-weight: bold; /* Bold text on hover */
+}
+
+/* Upload section styles */
+.upload-section {
+  margin-top: 20px;
+  z-index: 2; /* Ensure it's above the overlay */
+  background: rgba(255, 255, 255, 0.8); /* Add light background for better readability */
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Table section styles */
+.table-section {
+  margin-top: 20px;
+  width: 60%; /* Reduce the width of the table section */
+  max-width: 90%; /* Set a maximum width */
+  max-height: 60vh; /* Limit the height of the table section */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2; /* Ensure it's above the overlay */
+  border: 1px solid #ddd; /* Add a border around the table section */
+  background: rgba(255, 255, 255, 0.8); /* Add a light background for better readability */
+  padding: 10px;
+}
+
+/* Chatbot icon styles */
+.chatbot-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1; /* Ensure it remains above video */
+}
+
+/* Table container styles */
+.table-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 40vh; /* Limit the height of the table container */
+  margin: 20px auto;
+  max-width: 90%; /* Limit the maximum width for better responsiveness */
+}
+
+/* Table styles */
+.json-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px; /* Reduce font size */
+}
+
+.json-table th,
+.json-table td {
+  border: 1px solid #ddd;
+  padding: 8px; /* Reduce padding */
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+  max-width: 200px; /* Limit the width of each cell */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+}
+
+.json-table th {
+  background-color: #0D6EFD;
   color: white;
+  font-weight: bold;
+  position: sticky; /* Make headers sticky */
+  top: 0; /* Stick to the top */
+  z-index: 2; /* Ensure headers are above table content */
 }
 
-.App-link {
-  color: #61dafb;
+.json-table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Alternate row colors */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.json-table tr:hover {
+  background-color: #ddd;
+}
+
+/* PDF button container styles */
+.pdf-button-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  z-index: 2; /* Ensure the PDF button is above the overlay */
 }
